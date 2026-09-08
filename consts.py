@@ -11,6 +11,15 @@ BUSH_COUNT = 20
 BUSH_ROW = 2
 BUSH_COL = 2
 
+FLAG_ROWS = 3
+FLAG_COLS = 4
+
+SOLDIER_ROWS = 4
+SOLDIER_COLS = 2
+SOLDIER_BODY_ROWS = 3   # the upper part
+SOLDIER_FEET_ROWS = 1   # the lower part
+SOLDIER_FIRST_INDEX = (0,0)
+
 SOLDIER_NAME = "Soldier"
 MINE_NAME = "Mine"
 FLAG_NAME = "Flag"
