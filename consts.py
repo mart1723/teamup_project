@@ -1,0 +1,31 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BOARD_ROWS = 25
+BOARD_COLS = 50
+CELL_SIZE = 20 # pixels per cell
+WINDOW_WIDTH = BOARD_COLS * CELL_SIZE
+WINDOW_HEIGHT = BOARD_ROWS * CELL_SIZE
+
+
+AMOUNT_OF_BUSHES = 20
