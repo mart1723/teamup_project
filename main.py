@@ -1,16 +1,31 @@
-# This is a sample Python script.
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import pygame
+import game_filed
+import consts
 
+pygame.init()
+is_running = True
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+game_filed.create_game_filed()
+game_filed.scatter_mines()
+game_filed.scatter_bushes()
+matrix = game_filed.get_game_filed()
+for row in range(len(matrix)):
+    print(matrix[row])
 
+"""
+while is_running:
+    for event in pygame.event.get():
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                print("Move up")
+            elif event.key == pygame.K_DOWN:
+                print("Move down")
+            elif event.key == pygame.K_LEFT:
+                print("Move left")
+            elif event.key == pygame.K_RIGHT:
+                print("Move right")
+            elif event.key == pygame.K_KP_ENTER:
+                print("Enter")
+"""
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
