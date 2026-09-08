@@ -8,6 +8,7 @@ def create_soldier():
         "first_col": 0
     }
 
+
 def move_up(soldier):
     if soldier['top_row'] - 1 >= 0:
         soldier = move_soldier(soldier, "up")

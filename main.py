@@ -19,6 +19,7 @@ for row in range(len(matrix)):
 
 soldier.move_down(sol)
 
+
 print("-----------------------")
 for row in range(len(matrix)):
     print(matrix[row])

@@ -22,6 +22,7 @@ def create_flag():
             flag_cord.append((row, col))
     return flag_cord
 
+
 def put_soldier(soldier):
     soldier_row = soldier['top_row']
     soldier_col = soldier['first_col']
