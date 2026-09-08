@@ -39,6 +39,7 @@ def scatter_mines():
 
 def scatter_bushes():
     bushes_scattered = 0
+    bushes_map = []
     while bushes_scattered < consts.BUSH_COUNT:
         start_row = random.randrange(0, consts.BOARD_ROWS-1)
         start_col = random.randrange(0, consts.BOARD_COLS-1)
@@ -50,6 +51,8 @@ def scatter_bushes():
                     else:
                         game_filed[start_row + check_row][start_col + check_col] = consts.BUSH_NAME
             bushes_scattered += 1
+            bushes_map.append((start_row, start_col))
+    return bushes_map
 
 
 def check_space(row, col, object):
