@@ -22,6 +22,36 @@ def create_flag():
             flag_cord.append((row, col))
     return flag_cord
 
+def put_soldier(soldier):
+    soldier_row = soldier['top_row']
+    soldier_col = soldier['first_col']
+    for row in range(soldier_row, soldier_row+consts.SOLDIER_ROWS):
+        for col in range(soldier_col, soldier_col+consts.SOLDIER_COLS):
+            if game_filed[row][col] == '':
+                game_filed[row][col] = consts.SOLDIER_NAME
+            else:
+                game_filed[row][col] +='_'+ consts.SOLDIER_NAME
+
+def move_soldier(soldier, direction):
+    soldier_row = soldier['top_row']
+    soldier_col = soldier['first_col']
+    remove_soldier_from_filed(soldier_row, soldier_col)
+    if direction == "up":
+        soldier['top_row'] -= 1
+        put_soldier(soldier)
+        return soldier
+    elif direction == "down":
+        soldier['top_row'] += 1
+        put_soldier(soldier)
+        return soldier
+    elif direction == "left":
+        soldier['first_col'] -= 1
+        put_soldier(soldier)
+        return soldier
+    elif direction == "right":
+        soldier['first_col'] += 1
+        put_soldier(soldier)
+        return soldier
 
 def scatter_mines():
     mines_scattered = 0
@@ -39,6 +69,7 @@ def scatter_mines():
 
 def scatter_bushes():
     bushes_scattered = 0
+    bushes_map = []
     while bushes_scattered < consts.BUSH_COUNT:
         start_row = random.randrange(0, consts.BOARD_ROWS-1)
         start_col = random.randrange(0, consts.BOARD_COLS-1)
@@ -50,6 +81,9 @@ def scatter_bushes():
                     else:
                         game_filed[start_row + check_row][start_col + check_col] = consts.BUSH_NAME
             bushes_scattered += 1
+            bushes_map.append((start_row, start_col))
+    return bushes_map
+
 
 
 def check_space(row, col, object):
@@ -91,6 +125,17 @@ def not_in_flag(mine_row, mine_col):
             if row == mine_row and col == mine_col:
                 return False
     return True
+
+def remove_soldier_from_filed(soldier_row, soldier_col):
+    for row in range(soldier_row, consts.SOLDIER_ROWS):
+        for col in range(soldier_col, consts.SOLDIER_COLS):
+            if game_filed[row][col] == consts.SOLDIER_NAME:
+                game_filed[row][col] = ''
+            else:
+                words = game_filed[row][col].split('_')
+                if words[0] == consts.SOLDIER_NAME:
+                    words.pop(0)
+                game_filed[row][col] = words[0]
 
 def get_game_filed():
     return game_filed
