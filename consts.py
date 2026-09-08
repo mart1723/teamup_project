@@ -1,31 +1,17 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 BOARD_ROWS = 25
 BOARD_COLS = 50
-CELL_SIZE = 20 # pixels per cell
-WINDOW_WIDTH = BOARD_COLS * CELL_SIZE
-WINDOW_HEIGHT = BOARD_ROWS * CELL_SIZE
+CELL_SIZE  = 20
 
+MINE_COUNT = 20
+MINE_ROW = 1
+MINE_COL = 3
 
-AMOUNT_OF_BUSHES = 20
+BUSH_COUNT = 20
+BUSH_ROW = 2
+BUSH_COL = 2
+
+SOLDIER_NAME = "Soldier"
+MINE_NAME = "Mine"
+FLAG_NAME = "Flag"
+BUSH_NAME = "Bush"
