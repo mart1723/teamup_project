@@ -58,7 +58,7 @@ def insert_mines(surface,mine_list):
 
 
 
-def create_day_screen():
+def create_day_screen(soldier,bush_map):
     #day screen
     # Initializing Pygame modules
     pygame.init()
@@ -74,16 +74,16 @@ def create_day_screen():
     surface.fill(consts.DARK_GREEN)
 
     game_filed.create_game_filed()
-    insert_bushes(surface,game_filed.scatter_bushes())
+    insert_bushes(surface,bush_map)
     create_flag(surface,game_filed.flag_col*consts.CELL_SIZE, game_filed.flag_row*consts.CELL_SIZE)
-    create_soldier(surface,0, 0)
+    create_soldier(surface,soldier["first_col"]*consts.CELL_SIZE, soldier["top_row"]*consts.CELL_SIZE)
     create_text(surface)
     pygame.display.flip()
-    time.sleep(3)
 
 
 
-def create_night_screen():
+
+def create_night_screen(soldier,mine_map,bush_map):
     #night screen
     # Initializing Pygame modules
     pygame.init()
@@ -96,13 +96,10 @@ def create_night_screen():
     night_surface.fill(color)
 
     drawGrid(night_surface,consts.DARK_GREEN)
-    create_soldier_night(night_surface,0, 0)
+    create_soldier_night(night_surface,soldier["first_col"]*consts.CELL_SIZE, soldier["top_row"]*consts.CELL_SIZE)
     game_filed.create_game_filed()
-    insert_mines(night_surface,game_filed.scatter_mines())
+    insert_mines(night_surface,mine_map)
 
     pygame.display.flip()
-    time.sleep(3)
-
-
-create_day_screen()
-create_night_screen()
+    time.sleep(1)
+    create_day_screen(soldier,bush_map)
