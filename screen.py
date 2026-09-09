@@ -1,6 +1,8 @@
-# Importing the library
 import pygame
 import time
+
+from pygame import surface
+
 import consts
 import game_filed
 
@@ -59,18 +61,15 @@ def insert_mines(surface,mine_list):
 
 
 def create_day_screen(soldier,bush_map):
-    #day screen
-    # Initializing Pygame modules
-    pygame.init()
-    # Initializing surface
     surface = pygame.display.set_mode((consts.WINDOW_WIDTH, consts.WINDOW_HEIGHT))
-    pygame.font.init()
+    surface.fill(consts.DARK_GREEN)
     pygame.display.set_caption("flag game")
-    draw = draw_day_screen(surface,soldier,bush_map)
+    draw = draw_day_screen(soldier,bush_map)
     return draw
 
 
-def draw_day_screen(surface,soldier,bush_map):
+def draw_day_screen(soldier,bush_map):
+    surface = pygame.display.set_mode((consts.WINDOW_WIDTH, consts.WINDOW_HEIGHT))
     surface.fill(consts.DARK_GREEN)
 
     game_filed.create_game_filed()
@@ -81,7 +80,7 @@ def draw_day_screen(surface,soldier,bush_map):
     pygame.display.flip()
 
 
-def create_night_screen(soldier,mine_map):
+def create_night_screen(soldier,mine_map, bush_map):
     #night screen
     # Initializing Pygame modules
     pygame.init()
@@ -89,13 +88,14 @@ def create_night_screen(soldier,mine_map):
     # Initializing surface
     night_surface = pygame.display.set_mode((consts.WINDOW_WIDTH, consts.WINDOW_HEIGHT))
     pygame.display.set_caption("flag game")
-    draw = draw_night_screen(night_surface,soldier,mine_map)
+    #draw = draw_night_screen(soldier,mine_map, bush_map)
 
-    return draw
+    #return draw
 
 
 
-def draw_night_screen(night_surface,surface,soldier,mine_map,bush_map):
+def draw_night_screen(soldier,mine_map,bush_map):
+    night_surface = pygame.display.set_mode((consts.WINDOW_WIDTH, consts.WINDOW_HEIGHT))
     # Initializing RGB Color
     color = (0, 0, 0)
     night_surface.fill(color)
@@ -107,5 +107,23 @@ def draw_night_screen(night_surface,surface,soldier,mine_map,bush_map):
 
     pygame.display.flip()
     time.sleep(1)
-    create_day_screen(surface,soldier,bush_map)
+    create_day_screen(soldier,bush_map)
+
+
+
+
+def draw_lose_message():
+    draw_message(consts.LOSE_MESSAGE, consts.LOSE_FONT_SIZE,
+                 consts.LOSE_COLOR, consts.LOSE_LOCATION)
+
+
+def draw_win_message():
+    draw_message(consts.WIN_MESSAGE, consts.WIN_FONT_SIZE,
+                 consts.WIN_COLOR, consts.WIN_LOCATION)
+
+
+def draw_message(message, font_size, color, location):
+    font = pygame.font.SysFont(consts.FONT_NAME, font_size)
+    text_img = font.render(message, True, color)
+    return surface.blit(text_img, location)
 
