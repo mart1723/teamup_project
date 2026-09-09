@@ -28,3 +28,5 @@ SOLDIER_NAME = "Soldier"
 MINE_NAME = "Mine"
 FLAG_NAME = "Flag"
 BUSH_NAME = "Bush"
+
+DARK_GREEN = (34, 139, 34)
