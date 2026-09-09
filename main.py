@@ -1,5 +1,6 @@
 #פרוייקט זוגות מרטין ומאיה
 #מרטין:330851031 מאיה:217214162
+
 import pygame
 import game_filed
 import soldier
