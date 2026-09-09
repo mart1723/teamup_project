@@ -44,11 +44,7 @@ def touch_flag(soldier, flag_cord):
 def touch_mine(soldier, mine_map):
     leg_row = soldier['top_row'] + 3
     leg_cols = soldier['first_col']
-    for mine in mine_map:
-        (mine_row, mine_first_col) = mine
-        for leg_num in range(2):
-            for col in range(consts.MINE_COL):
-                if (leg_row == mine_row and
-                        leg_cols+leg_num == mine_first_col+col):
-                    return True
+    for col in range(2):
+        if (leg_row, leg_cols + col) in mine_map:
+            return True
     return False

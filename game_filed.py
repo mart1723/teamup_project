@@ -1,23 +1,25 @@
 
 import consts
 import random
+from consts import BOARD_ROWS
+from consts import BOARD_COLS
 
 game_filed = []
-flag_row = consts.BOARD_ROWS - consts.FLAG_ROWS
-flag_col = consts.BOARD_COLS - consts.FLAG_COLS
+flag_row = BOARD_ROWS - consts.FLAG_ROWS
+flag_col = BOARD_COLS - consts.FLAG_COLS
 
 
 def create_game_filed():
     global game_filed
-    for row in range(consts.BOARD_ROWS):
+    for row in range(BOARD_ROWS):
         game_filed.append([])
-        for col in range(consts.BOARD_COLS):
+        for col in range(BOARD_COLS):
             game_filed[row].append('')
 
 def create_flag():
     flag_cord = []
-    for row in range(flag_row, consts.BOARD_ROWS):
-        for col in range(flag_col, consts.BOARD_COLS):
+    for row in range(flag_row, BOARD_ROWS):
+        for col in range(flag_col, BOARD_COLS):
             game_filed[row][col] = consts.FLAG_NAME
             flag_cord.append((row, col))
     return flag_cord
@@ -57,8 +59,8 @@ def scatter_mines():
     mines_scattered = 0
     mine_map = []
     while mines_scattered < consts.MINE_COUNT:
-        rnd_row = random.randrange(0, consts.BOARD_ROWS)
-        start_col = random.randrange(0, consts.BOARD_COLS-2)
+        rnd_row = random.randrange(0, BOARD_ROWS)
+        start_col = random.randrange(0, BOARD_COLS-2)
         if (check_space(rnd_row, start_col, consts.MINE_NAME) and check_col(start_col) and
                 not_in_spawn(rnd_row, start_col) and not_in_flag(rnd_row, start_col)):
             for check in range(consts.MINE_COL):
@@ -71,8 +73,8 @@ def scatter_bushes():
     bushes_scattered = 0
     bushes_map = []
     while bushes_scattered < consts.BUSH_COUNT:
-        start_row = random.randrange(0, consts.BOARD_ROWS-1)
-        start_col = random.randrange(0, consts.BOARD_COLS-1)
+        start_row = random.randrange(0, BOARD_ROWS-1)
+        start_col = random.randrange(0, BOARD_COLS-1)
         if check_space(start_row, start_col, consts.BUSH_NAME):
             for check_row in range(consts.BUSH_ROW):
                 for check_col in range(consts.BUSH_COL):
@@ -104,7 +106,7 @@ def check_space(row, col, object):
 def check_col(start_col):
     for col in range(start_col,consts.MINE_COL):
         mine_in_col = 0
-        for row in range(consts.BOARD_ROWS):
+        for row in range(BOARD_ROWS):
             if game_filed[row][col] == consts.MINE_NAME:
                 mine_in_col += 1
 
@@ -120,8 +122,8 @@ def not_in_spawn(mine_row, mine_col):
     return True
 
 def not_in_flag(mine_row, mine_col):
-    for row in range(flag_row, consts.BOARD_ROWS):
-        for col in range(flag_col, consts.BOARD_COLS):
+    for row in range(flag_row, BOARD_ROWS):
+        for col in range(flag_col, BOARD_COLS):
             if row == mine_row and col == mine_col:
                 return False
     return True
