@@ -57,7 +57,7 @@ def move_soldier(soldier, direction):
         soldier['first_col'] -= 1
         put_soldier(soldier)
         return True
-    elif direction == "right" and soldier['first_col'] + consts.SOLDIER_COLS < consts.BOARD_COLS:
+    elif direction == "right" and soldier['first_col'] + consts.SOLDIER_COLS +1 < consts.BOARD_COLS:
         soldier['first_col'] += 1
         put_soldier(soldier)
         return True
@@ -146,6 +146,3 @@ def remove_soldier_from_filed(soldier_row, soldier_col):
                 if words[0] == consts.SOLDIER_NAME:
                     words.pop(0)
                 game_filed[row][col] = words[0]
-
-def get_game_filed():
-    return game_filed

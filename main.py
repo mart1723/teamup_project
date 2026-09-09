@@ -20,8 +20,7 @@ def main():
     flag_cord = info[0]
     mine_map = info[1]
     bush_map = info[2]
-    screen.create_day_screen(charter, bush_map)
-    screen.create_night_screen(charter, mine_map, bush_map)
+    screen.draw_day_screen(charter, bush_map)
 
     is_running = True
     direction = ["up", "down", "left", "right"]
@@ -36,21 +35,17 @@ def main():
 
         if soldier.touch_mine(charter, mine_map):
             state["touch_mine"] = True
-            print("Mine")
 
         if soldier.touch_flag(charter, flag_cord):
             state["touch_flag"] = True
-            print("Flag")
+
+        screen.draw_day_screen(charter, bush_map)
 
         if state["touch_flag"]:
             win()
         elif state["touch_mine"]:
             lose()
             is_running = False
-
-        screen.draw_day_screen(charter, bush_map)
-
-
 
 
 def event_handler(charter):
@@ -70,11 +65,11 @@ def event_handler(charter):
             state["key_pressed"] = None
 
 def lose():
-
+    screen.draw_lose_message()
     pygame.quit()
 
 def win():
-
+    screen.draw_win_message()
     pygame.quit()
 
 
