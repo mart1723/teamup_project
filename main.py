@@ -1,4 +1,5 @@
-
+#פרוייקט זוגות מרטין ומאיה
+#מרטין:330851031 מאיה:217214162
 import pygame
 import game_filed
 import soldier
@@ -22,10 +23,9 @@ def main():
     bush_map = info[2]
     screen.draw_day_screen(charter, bush_map)
 
-    is_running = True
     direction = ["up", "down", "left", "right"]
 
-    while is_running:
+    while state["window_open"]:
         event_handler(charter)
 
         if state["key_pressed"] in direction:
@@ -45,7 +45,7 @@ def main():
             win()
         elif state["touch_mine"]:
             lose()
-            is_running = False
+            state["window_open"] = False
 
 
 def event_handler(charter):

@@ -1,4 +1,5 @@
-
+#פרוייקט זוגות מרטין ומאיה
+#מרטין:330851031 מאיה:217214162
 import consts
 import random
 from consts import BOARD_ROWS
