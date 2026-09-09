@@ -1,4 +1,3 @@
-from itertools import count
 
 import pygame
 import game_filed
