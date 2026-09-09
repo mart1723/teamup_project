@@ -1,3 +1,4 @@
+from itertools import count
 
 import pygame
 import game_filed
@@ -9,19 +10,38 @@ is_running = True
 sol = soldier.create_soldier()
 
 game_filed.create_game_filed()
-game_filed.create_flag()
+flag_cords = game_filed.create_flag()
 game_filed.put_soldier(sol)
-game_filed.scatter_mines()
+mine_map = game_filed.scatter_mines()
 game_filed.scatter_bushes()
 matrix = game_filed.get_game_filed()
 for row in range(len(matrix)):
     print(matrix[row])
 
-soldier.move_down(sol)
+row_count = 3
+col_count = 1
 
-print("-----------------------")
-for row in range(len(matrix)):
-    print(matrix[row])
+while is_running:
+    if row_count < consts.BOARD_ROWS:
+        soldier.move_down(sol)
+        row_count += 1
+
+    if col_count < consts.BOARD_COLS:
+        soldier.move_right(sol)
+        col_count += 1
+
+    print("--------------------------------------------------------------------")
+    for row in range(len(matrix)):
+        print(matrix[row])
+
+    if soldier.touch_mine(sol, mine_map):
+        print("Mine")
+        is_running = False
+    if soldier.touch_flag(sol, flag_cords):
+        print("Flag")
+        is_running = False
+
+
 
 """
 while is_running:
