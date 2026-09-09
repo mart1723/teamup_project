@@ -13,6 +13,7 @@ state = {
 
 }
 
+#פונקציה האחראית לריצת המשחק
 def main():
     pygame.init()
     # create screen and objects
@@ -47,7 +48,7 @@ def main():
             lose()
             state["window_open"] = False
 
-
+#פונקציה הדואגת לתחזוק המקרים הקוראים המשחק
 def event_handler(charter):
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
@@ -62,10 +63,12 @@ def event_handler(charter):
             elif event.key == pygame.K_RETURN:
                 state["key_pressed"] = "enter"
 
+#פונרציית הפסד
 def lose():
     screen.draw_lose_message()
     pygame.quit()
 
+#פונקציית ניצחון
 def win():
     screen.draw_win_message()
     pygame.quit()
