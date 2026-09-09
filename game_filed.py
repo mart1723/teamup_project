@@ -8,6 +8,13 @@ game_filed = []
 flag_row = BOARD_ROWS - consts.FLAG_ROWS
 flag_col = BOARD_COLS - consts.FLAG_COLS
 
+def first_creat(soldier):
+    create_game_filed()
+    flag_cord =create_flag()
+    put_soldier(soldier)
+    mine_map = scatter_mines()
+    bush_map = scatter_bushes()
+    return (flag_cord, mine_map, bush_map)
 
 def create_game_filed():
     global game_filed
@@ -38,22 +45,23 @@ def move_soldier(soldier, direction):
     soldier_row = soldier['top_row']
     soldier_col = soldier['first_col']
     remove_soldier_from_filed(soldier_row, soldier_col)
-    if direction == "up":
+    if direction == "up" and soldier['top_row'] - 1 > 0:
         soldier['top_row'] -= 1
         put_soldier(soldier)
-        return soldier
-    elif direction == "down":
+        return True
+    elif direction == "down" and soldier['top_row'] + consts.SOLDIER_ROWS < BOARD_ROWS:
         soldier['top_row'] += 1
         put_soldier(soldier)
-        return soldier
-    elif direction == "left":
+        return True
+    elif direction == "left" and soldier['first_col'] - 1 > 0:
         soldier['first_col'] -= 1
         put_soldier(soldier)
-        return soldier
-    elif direction == "right":
+        return True
+    elif direction == "right" and soldier['first_col'] + consts.SOLDIER_COLS < consts.BOARD_COLS:
         soldier['first_col'] += 1
         put_soldier(soldier)
-        return soldier
+        return True
+    return False
 
 def scatter_mines():
     mines_scattered = 0

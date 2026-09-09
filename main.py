@@ -1,60 +1,84 @@
 
 import pygame
 import game_filed
-import consts
 import soldier
+import screen
 
-pygame.init()
-is_running = True
-sol = soldier.create_soldier()
+state = {
+    "window_open": True,
+    "key_pressed": '',
+    "touch_mine": False,
+    "touch_flag": False,
 
-game_filed.create_game_filed()
-flag_cords = game_filed.create_flag()
-game_filed.put_soldier(sol)
-mine_map = game_filed.scatter_mines()
-game_filed.scatter_bushes()
-matrix = game_filed.get_game_filed()
-for row in range(len(matrix)):
-    print(matrix[row])
+}
 
-row_count = 3
-col_count = 1
+def main():
+    pygame.init()
+    # create screen and objects
+    charter = soldier.create_soldier()
+    info = game_filed.first_creat(charter)
+    flag_cord = info[0]
+    mine_map = info[1]
+    bush_map = info[2]
+    screen.create_day_screen(charter, bush_map)
+    screen.create_night_screen(charter, mine_map, bush_map)
 
-while is_running:
-    if row_count < consts.BOARD_ROWS:
-        soldier.move_down(sol)
-        row_count += 1
+    is_running = True
+    direction = ["up", "down", "left", "right"]
 
-    if col_count < consts.BOARD_COLS:
-        soldier.move_right(sol)
-        col_count += 1
+    while is_running:
+        event_handler(charter)
 
-    print("--------------------------------------------------------------------")
-    for row in range(len(matrix)):
-        print(matrix[row])
+        if state["key_pressed"] in direction:
+            game_filed.move_soldier(charter, state["key_pressed"])
+        elif state["key_pressed"] == "enter":
+            screen.draw_night_screen(charter, mine_map, bush_map)
 
-    if soldier.touch_mine(sol, mine_map):
-        print("Mine")
-        is_running = False
-    if soldier.touch_flag(sol, flag_cords):
-        print("Flag")
-        is_running = False
+        if soldier.touch_mine(charter, mine_map):
+            state["touch_mine"] = True
+            print("Mine")
+
+        if soldier.touch_flag(charter, flag_cord):
+            state["touch_flag"] = True
+            print("Flag")
+
+        if state["touch_flag"]:
+            win()
+        elif state["touch_mine"]:
+            lose()
+            is_running = False
+
+        screen.draw_day_screen(charter, bush_map)
 
 
 
-"""
-while is_running:
+
+def event_handler(charter):
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
-                print("Move up")
+                state["key_pressed"] = "up"
             elif event.key == pygame.K_DOWN:
-                print("Move down")
+                state["key_pressed"] = "down"
             elif event.key == pygame.K_LEFT:
-                print("Move left")
+                state["key_pressed"] = "left"
             elif event.key == pygame.K_RIGHT:
-                print("Move right")
-            elif event.key == pygame.K_KP_ENTER:
-                print("Enter")
-"""
+                state["key_pressed"] = "right"
+            elif event.key == pygame.K_RETURN:
+                state["key_pressed"] = "enter"
+        if event.type == pygame.KEYUP:
+            state["key_pressed"] = None
 
+def lose():
+
+    pygame.quit()
+
+def win():
+
+    pygame.quit()
+
+
+
+# Press the green button in the gutter to run the script.
+if __name__ == '__main__':
+    main()

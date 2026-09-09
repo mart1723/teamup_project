@@ -1,4 +1,4 @@
-# Importing the library
+
 import pygame
 import time
 import consts
@@ -59,18 +59,15 @@ def insert_mines(surface,mine_list):
 
 
 def create_day_screen(soldier,bush_map):
-    #day screen
-    # Initializing Pygame modules
-    pygame.init()
-
-    # Initializing surface
     surface = pygame.display.set_mode((consts.WINDOW_WIDTH, consts.WINDOW_HEIGHT))
-    pygame.font.init()
-
+    surface.fill(consts.DARK_GREEN)
     pygame.display.set_caption("flag game")
+    draw = draw_day_screen(soldier,bush_map)
+    return draw
 
 
-    # Changing surface color
+def draw_day_screen(soldier,bush_map):
+    surface = pygame.display.set_mode((consts.WINDOW_WIDTH, consts.WINDOW_HEIGHT))
     surface.fill(consts.DARK_GREEN)
 
     game_filed.create_game_filed()
@@ -81,9 +78,7 @@ def create_day_screen(soldier,bush_map):
     pygame.display.flip()
 
 
-
-
-def create_night_screen(soldier,mine_map,bush_map):
+def create_night_screen(soldier,mine_map, bush_map):
     #night screen
     # Initializing Pygame modules
     pygame.init()
@@ -91,14 +86,22 @@ def create_night_screen(soldier,mine_map,bush_map):
     # Initializing surface
     night_surface = pygame.display.set_mode((consts.WINDOW_WIDTH, consts.WINDOW_HEIGHT))
     pygame.display.set_caption("flag game")
+    #draw = draw_night_screen(soldier,mine_map, bush_map)
+
+    #return draw
+
+
+
+def draw_night_screen(soldier,mine_map,bush_map):
+    night_surface = pygame.display.set_mode((consts.WINDOW_WIDTH, consts.WINDOW_HEIGHT))
     # Initializing RGB Color
     color = (0, 0, 0)
     night_surface.fill(color)
 
-    drawGrid(night_surface,consts.DARK_GREEN)
-    create_soldier_night(night_surface,soldier["first_col"]*consts.CELL_SIZE, soldier["top_row"]*consts.CELL_SIZE)
+    drawGrid(night_surface, consts.DARK_GREEN)
+    create_soldier_night(night_surface, soldier["first_col"] * consts.CELL_SIZE, soldier["top_row"] * consts.CELL_SIZE)
     game_filed.create_game_filed()
-    insert_mines(night_surface,mine_map)
+    insert_mines(night_surface, mine_map)
 
     pygame.display.flip()
     time.sleep(1)
