@@ -9,32 +9,32 @@ def create_soldier():
     }
 
 def move_up(soldier):
-    if soldier['top_row'] - 1 >= 0:
+    if soldier['top_row'] - 1 > 0:
         soldier = move_soldier(soldier, "up")
         return True
     return False
 
 def move_down(soldier):
-    if soldier['top_row']+3 + 1 <= consts.BOARD_ROWS:
+    if soldier['top_row']+3 + 1 < consts.BOARD_ROWS:
         soldier = move_soldier(soldier, "down")
         return True
     return False
 
 def move_left(soldier):
-    if soldier['top_col'] - 1 >= 0:
+    if soldier['first_col'] - 1 > 0:
         soldier = move_soldier(soldier, "left")
         return True
     return False
 
 def move_right(soldier):
-    if soldier['top_col']+1 + 1 <= consts.BOARD_COLS:
+    if soldier['first_col']+1 + 1 < consts.BOARD_COLS:
         soldier = move_soldier(soldier, "right")
         return True
     return False
 
 def touch_flag(soldier, flag_cord):
     soldier_row = soldier['top_row']
-    soldier_col = soldier['top_col']
+    soldier_col = soldier['first_col']
     for row in range(3):
         for col in range(2):
             if (soldier_row + row,soldier_col + col) in flag_cord:
@@ -43,7 +43,7 @@ def touch_flag(soldier, flag_cord):
 
 def touch_mine(soldier, mine_map):
     leg_row = soldier['top_row'] + 3
-    leg_cols = (soldier['first_col'], soldier['top_col']+1)
+    leg_cols = soldier['first_col']
     for mine in mine_map:
         (mine_row, mine_first_col) = mine
         for leg_num in range(2):

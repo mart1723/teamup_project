@@ -127,8 +127,8 @@ def not_in_flag(mine_row, mine_col):
     return True
 
 def remove_soldier_from_filed(soldier_row, soldier_col):
-    for row in range(soldier_row, consts.SOLDIER_ROWS):
-        for col in range(soldier_col, consts.SOLDIER_COLS):
+    for row in range(soldier_row, soldier_row+ consts.SOLDIER_ROWS):
+        for col in range(soldier_col,soldier_col + consts.SOLDIER_COLS):
             if game_filed[row][col] == consts.SOLDIER_NAME:
                 game_filed[row][col] = ''
             else:
