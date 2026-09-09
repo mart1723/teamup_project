@@ -22,7 +22,6 @@ def main():
     mine_map = info[1]
     bush_map = info[2]
     screen.draw_day_screen(charter, bush_map)
-
     direction = ["up", "down", "left", "right"]
 
     while state["window_open"]:
@@ -30,6 +29,7 @@ def main():
 
         if state["key_pressed"] in direction:
             game_filed.move_soldier(charter, state["key_pressed"])
+            state["key_pressed"] = ''
         elif state["key_pressed"] == "enter":
             screen.draw_night_screen(charter, mine_map, bush_map)
 
@@ -61,8 +61,6 @@ def event_handler(charter):
                 state["key_pressed"] = "right"
             elif event.key == pygame.K_RETURN:
                 state["key_pressed"] = "enter"
-        if event.type == pygame.KEYUP:
-            state["key_pressed"] = None
 
 def lose():
     screen.draw_lose_message()
