@@ -20,7 +20,7 @@ def create_bush(x, y):
     bush = pygame.transform.scale(bush_raw, (consts.CELL_SIZE * consts.BUSH_COL, consts.CELL_SIZE * consts.BUSH_ROW))
     return surface.blit(bush,(y*consts.CELL_SIZE,x*consts.CELL_SIZE))
 
-# פונקציה שמקבלת רשימה של שיחים ומציירת את כל השיחים במיקומים הרנדומלים שלהם על המסך בעזרת הפונקציה create_bush
+# פונקציה שמקבלת רשימה של שיחים במיקומים רנדומלים מscatter_bushes ומציירת את כל השיחים במיקומים שלהם על המסך בעזרת הפונקציה create_bush
 def insert_bushes(bush_list):
     for i in range(len(bush_list)):
         create_bush(bush_list[i][0],bush_list[i][1])
@@ -59,7 +59,7 @@ def create_mine(x, y):
     return surface.blit(mine,(y*consts.CELL_SIZE,x*consts.CELL_SIZE))
 
 
-# פונקציה שמקבלת רשימה של מוקשים ומציירת את כל המוקשים במיקומים הרנדומלים שלהם על המסך בעזרת הפונקציה create_mine
+# פונקציה שמקבלת רשימה של מוקשים במיקומים רנדומלים מscatter_mines ומציירת את כל המוקשים במיקומים הרנדומלים שלהם על המסך בעזרת הפונקציה create_mine
 def insert_mines(mine_list):
     for i in range(len(mine_list)):
         create_mine(mine_list[i][0],mine_list[i][1])
